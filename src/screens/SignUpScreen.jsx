@@ -1,44 +1,44 @@
-import React, { useEffect, useState, useContext , useRef } from 'react'
-import "./SignUpScreen.css"
+import React, { useState } from "react";
+import "./SignUpScreen.css";
+
+
 import  auth  from '../firebase';
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 function SignUpScreen() {
-     
-    const history=useHistory()
-    const[email,setEmail]=useState("");
-    const [password,setPassword]=useState("");
+    const history=useHistory();
+ 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const register = (e) => {
+    e.preventDefault();
+    auth.createUserWithEmailAndPassword(email,password).then((authUser)=>{
+        console.log(authUser);
+        history.push("/login");
+        setEmail("");
+        setPassword("")
+    }).catch((error)=>{
+        console.log(error);
+    })
 
-    const register = (e) => {
-        e.preventDefault();
-        auth.createUserWithEmailAndPassword(email,password).then((authUser)=>{
-            console.log(authUser);
-            setEmail("");
-            setPassword("")
-        }).catch((error)=>{
-            console.log(error);
-        })
-    
-    }
-    const signIn=(e)=>{
-        e.preventDefault();
-        auth.signInWithEmailAndPassword(email, password).then((authUser)=>{
+}
 
-            localStorage.setItem("isSignin",true)
-            history.push("/")
+  return (
+    <div className="loginScreen ">
+      <div className="loginScreen__background">
+        <img
+          className="loginScreen__logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
+          alt=""
+        />
+       
 
-            console.log(authUser);
+        <div className="loginScreen__gradient"></div>
 
-        }).catch((error)=>{
-            console.log(error)
-        })  
-    }
-  
-    return (
-        <div className="signupScreen">
+        <div className="loginScreen__body">
             <form>
                 <h1>
-                    Sign In
+                    Sign up
                 </h1>
                 <input   placeholder="Email" type="email" 
                  onChange={(e)=>{
@@ -51,17 +51,18 @@ function SignUpScreen() {
                   }}
                 
                 ></input>
-                <button type="submit" onClick={signIn}>Sign in</button>
-                <h4>
-                    <span className="signupScreen__grey">  New To Netflix? </span>
-
-                    <span className="signUpScreen__link"onClick={register} > SignUp Now.</span>
-
-                </h4>
+                <button type="submit" onClick={register} >Sign up</button>
+               
             </form>
 
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default SignUpScreen
+export default SignUpScreen;
+
+     
+
+       

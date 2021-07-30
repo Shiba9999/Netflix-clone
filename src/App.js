@@ -13,6 +13,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import SignUpScreen from './screens/SignUpScreen';
 
 function PrivateRoute( props ) {
   const authenticatedtoken = localStorage.getItem("isSignin");
@@ -30,6 +31,7 @@ function App() {
         <Switch>
 
           <Route exact path="/login" component={LoginScreen} />
+          <Route exact path="/signup" component={SignUpScreen} />
           <PrivateRoute exact path="/" component={HomeScreen} />
           <PrivateRoute  path="/profile" component={ProfileScreen} />
 

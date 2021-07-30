@@ -17,6 +17,21 @@
 
     );
 }
+.loginScreen__body{
+    z-index: 1;
+    color: #fff;
+   
+    position: absolute;
+    top:30%;
+    margin-left: 660px;
+    margin-right: auto;
+    text-align: center;
+    
+    margin-bottom: 1rem;
+    
+    
+   
+}
 .loginScreen__logo{
     position: fixed;
     left: 0;
@@ -26,76 +41,39 @@
     padding-top: 20px;
     cursor: pointer;
 }
-.loginScreen__button{
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    padding: 10px 20px;
-    font-size: 1 rem;
-    color:white;
-    background-color: red;
-   
-    border: none;
-    cursor: pointer;
-}
-.loginScreen__body{
-    z-index: 1;
-    color: #fff;
-    padding: 20px;
-    position: absolute;
-    top:30%;
-    margin-left: 30px;
-    margin-right: auto;
-    text-align: center;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    left: 0;
-    right: 0;
-    
-}
-.loginScreen__body>h1{
-    font-size: 3.125rem;
-    margin-bottom: 20px;
-    margin-left: 200px;
-    margin-right: 200px;
-}
-.loginScreen__body>h2{
-    margin-left: 200px;
-    font-size: 2rem;
-    font-weight: 400;
-    margin-bottom: 30px;
-    margin-right: 200px;
-}
-.loginScreen__body>h3{
-    font-size: 1.3rem;
-    font-weight: 400;
-    margin-left:200px;
-    margin-right: 300px;
+.loginScreen__body>form{
+    display: grid;
+    flex-direction: column;
 
 }
-.loginScreen__input>form>input{
-    padding: 10px;
+.loginScreen__body>form>input{
     outline-width: 0;
-    height: 30px;
-    width: 30%;
+    height: 40px;
+    margin-bottom: 14px;
+    border-radius: 5px;
     border: none;
-    max-width: 600px;
-    margin-left: 200px;
-  
-
+    padding: 5px 15px;
 }
-.loginScreen__getStarted{
+.loginScreen__body>form>button{
     padding: 16px 20px;
     font-size: 1rem;
-    color:#fff;
+    color: #fff;
+    border-radius: 5px;
     background-color: red;
-    border: none;
     font-weight: 600;
+    border: none;
     cursor: pointer;
-   height: fit-content;
-  
+    margin-top:20px ;
+}
+.loginScreen__body>form>h1{
+    text-align: left;
+    margin-bottom: 25px;
+}
+.signupScreen__grey{
+    color: grey;
+}
+.signUpScreen__link:hover{
+cursor: pointer;
+text-decoration: underline;
+}
 
-}
-.loginScreen__input>form{
-    margin-right: 280px;
-}

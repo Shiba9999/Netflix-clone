@@ -4,14 +4,11 @@ import axios from "./axios"
 import movieTrailer from "movie-trailer";
 import YouTube from 'react-youtube';  
 
-
 function Row({ title, fetchUrl, isLargeRow }) {
     const [movies, setMovies] = useState([]);
     const [trailerUrl,setTrailerUrl]=useState("");
     const base_url = "https://image.tmdb.org/t/p/original"
   
-    
-
     useEffect(() => {
         async function fetchData() {
             const request = await axios.get(fetchUrl)
@@ -54,9 +51,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
                         key={movie.id} src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} alt={movie.name}
 
                     />)
-
-
-
                 )}
             </div>
            {trailerUrl &&  <YouTube videoId={trailerUrl} opts={opts} />}

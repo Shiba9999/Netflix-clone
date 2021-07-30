@@ -33,13 +33,7 @@ function Banner() {
         return string?.length > n ? string.substr(0, n - 1) + "...." : string;
 
     }
-    async function signOut(e){
-        e.preventDefault();
-        localStorage.removeItem("isSignin")
-        history.push("/login")
-        return await auth.signOut();
-
-    }
+  
   
 
     return (<>
@@ -60,7 +54,7 @@ function Banner() {
 
                     <button className="banner__button">play</button>
                     <button className="banner__button">My List</button>
-                    <button className="banner__button_signout" onClick={signOut} >Sign Out</button>
+                  
                 </div>
                 <h1 className="banner__description">{truncate(movie?.overview, 150)} </h1>
             </div>

@@ -1,72 +1,76 @@
-import React,{useState} from 'react'
-import './LoginScreen.css'
-import SignUpScreen from './SignUpScreen';
+import React, { useState } from "react";
+import "./LoginScreen.css";
 
+
+import  auth  from '../firebase';
+import { Link, useHistory } from "react-router-dom";
 
 function LoginScreen() {
-
-    const [signIn,setSignIn]=useState(false);
-
-    return (
-
-        <div  className="loginScreen">
-            <div className="loginScreen__background" >
-                 
-
-              <img
-               className="loginScreen__logo"
-               src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
-
-               alt=""
-              
-              />
-              <button
-              className="loginScreen__button" 
-              onClick={()=>{
-                  setSignIn(true);
-              }}
-              >Sign in</button>
-
-              <div className="loginScreen__gradient"></div>
-
-              <div className="loginScreen__body">
-            {signIn?(
-                <SignUpScreen/>
-            ):(
-                <>
-                <h1>Unlimited Fun,Tv Series And More </h1>
-                <h2>Watch Anywhere. cancel at any time. </h2>
-                <h3>Enter Your email to create or restart your membership.</h3>
+    const history=useHistory();
  
-                <div className="loginScreen__input">
-                    
-                    <form>
-                      <input 
-                       type="email"
-                       placeholder="Email Address"
-                       
-                      />
-                      <button
-                          onClick={()=>{
-                             setSignIn(true);
-                         }}
-                       className="loginScreen__getStarted"
-                      >GET STARTED</button>
- 
-                    </form>
- 
-                </div>
-                </>
-            ) }
-                  
-              </div>
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const signIn=(e)=>{
+    e.preventDefault();
+    auth.signInWithEmailAndPassword(email, password).then((authUser)=>{
 
+        localStorage.setItem("isSignin",true)
+        history.push("/")
 
-            </div>
-            
-        </div>
-    )
+        console.log(authUser);
+
+    }).catch((error)=>{
+        console.log(error)
+    })  
 }
 
-export default LoginScreen
+  return (
+    <div className="loginScreen ">
+      <div className="loginScreen__background">
+        <img
+          className="loginScreen__logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
+          alt=""
+        />
+       
 
+        <div className="loginScreen__gradient"></div>
+
+        <div className="loginScreen__body">
+            <form>
+                <h1>
+                    Sign In
+                </h1>
+                <input   placeholder="Email" type="email" 
+                 onChange={(e)=>{
+                     setEmail(e.target.value);
+                 }}
+                ></input>
+                <input   placeholder="password" type="passsword"
+                  onChange={(e)=>{
+                      setPassword(e.target.value);
+                  }}
+                
+                ></input>
+                <button type="submit" onClick={signIn} >Sign in</button>
+                <h4>
+                    <span className="signupScreen__grey">  New To Netflix? </span>
+                      <Link to="/signup">
+                      <span className="signUpScreen__link" > SignUp Now.</span>
+                      </Link>
+                  
+
+                </h4>
+            </form>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default LoginScreen;
+
+     
+
+       

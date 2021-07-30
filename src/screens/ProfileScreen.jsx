@@ -1,9 +1,20 @@
 import React from 'react'
 import "./ProfileScreen.css"
-import {Link } from "react-router-dom"
+import {Link, useHistory } from "react-router-dom"
 import Nav from '../Component/Nav'
+import PlanScreen from './PlanScreen'
+import auth from '../firebase';
 
 function ProfileScreen() { 
+
+    const history=useHistory()
+    async function signOut(e){
+        e.preventDefault();
+        localStorage.removeItem("isSignin")
+        history.push("/login")
+        return await auth.signOut();
+
+    }
     return ( 
         <div className="profileScreen">
             <Link to="/">
@@ -16,7 +27,7 @@ function ProfileScreen() {
 
            <div className="profileScreen__body">
                
-               <h1>Edit Profile</h1>
+               <h2>Edit Profile</h2>
                <div className="profileScreen__info">
                    <img 
                    src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
@@ -26,8 +37,9 @@ function ProfileScreen() {
                        <h2>payment details</h2>
                        <div className="profileScreen__plans">
                            <h3>Plans</h3>
-                           <p></p>
-                           <button  className="profileScreen__signOut">Signout</button>
+
+                         <PlanScreen/>
+                           <button  className="profileScreen__signOut" onClick={signOut} >Signout</button>
                        </div>
                    </div>
 
